@@ -17,7 +17,8 @@ const server = new SMTPServer({
   },
   onData(stream, session, callback) {
     stream.on("data", (data) => {
-      console.log("data : ", data);
+      //console buffer data to String
+      console.log("data : ", data.toString());
       callback();
     });
     stream.on("end", () => {
