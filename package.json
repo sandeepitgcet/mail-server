@@ -1,0 +1,20 @@
+{
+  "name": "mail-server",
+  "version": "1.0.0",
+  "main": "index.js",
+  "scripts": {
+    "dev": "ts-node index.ts",
+    "start": "tsc && node src/index.js"
+  },
+  "author": "",
+  "license": "ISC",
+  "description": "",
+  "devDependencies": {
+    "@types/smtp-server": "^3.5.10",
+    "nodemon": "^3.1.0",
+    "ts-node": "^10.9.2"
+  },
+  "dependencies": {
+    "smtp-server": "^3.5.10"
+  }
+}
