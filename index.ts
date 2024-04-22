@@ -1,7 +1,5 @@
 import { SMTPServer } from "smtp-server";
-import { MailParser } from "mailparser";
-
-const parser = new MailParser();
+import { simpleParser } from "mailparser";
 
 const server = new SMTPServer({
   allowInsecureAuth: true,
@@ -20,16 +18,8 @@ const server = new SMTPServer({
   },
   onData(stream, session, callback) {
     stream.on("data", async (data) => {
-      parser.on("data", (data) => {
-        if (data.type === "text") {
-          console.log("Text Data: ", data.html);
-        }
-        if (data.type === "attachment") {
-          console.log("Attachment Data: ", data.filename);
-          data.content.pipe(process.stdout);
-          data.content.on("end", () => data.release());
-        }
-      });
+      let parsed = simpleParser(data.toString());
+      console.log("parsed : ", parsed);
     });
     stream.on("end", () => {
       console.log("stream end.");
