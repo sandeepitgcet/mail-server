@@ -3,7 +3,7 @@ import { simpleParser } from "mailparser";
 import nodemailer from "nodemailer";
 
 const transporter = nodemailer.createTransport({
-  host: "mail.prakamya.co.in",
+  host: "43.205.128.19",
   port: 25,
   secure: false,
 });
@@ -19,6 +19,7 @@ const server = new SMTPServer({
 
   onMailFrom(address, session, callback) {
     const SendReply = async () => {
+      console.log("Sending mail.................");
       const info = await transporter.sendMail({
         from: "hello@prakamya.co.in",
         to: address.address,
@@ -29,7 +30,11 @@ const server = new SMTPServer({
       console.log("Message sent: %s", info.messageId);
     };
     console.log("address : ", address);
-    SendReply();
+    try {
+      SendReply();
+    } catch (err) {
+      console.log("Error from sendReply: ", err);
+    }
     callback();
   },
   onRcptTo(address, session, callback) {
