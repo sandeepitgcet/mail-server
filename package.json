@@ -10,11 +10,13 @@
   "license": "ISC",
   "description": "",
   "devDependencies": {
+    "@types/mailparser": "^3.4.4",
     "@types/smtp-server": "^3.5.10",
     "nodemon": "^3.1.0",
     "ts-node": "^10.9.2"
   },
   "dependencies": {
+    "mailparser": "^3.7.0",
     "smtp-server": "^3.5.10"
   }
 }
