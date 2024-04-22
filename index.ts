@@ -1,15 +1,35 @@
 import { SMTPServer } from "smtp-server";
 import { simpleParser } from "mailparser";
+import nodemailer from "nodemailer";
+
+const transporter = nodemailer.createTransport({
+  host: "mail.prakamya.co.in",
+  port: 25,
+  secure: false,
+});
 
 const server = new SMTPServer({
   allowInsecureAuth: true,
   authOptional: true,
   onConnect: (session, cb) => {
     console.log("Connected : ", session.id);
+
     cb();
   },
+
   onMailFrom(address, session, callback) {
+    const SendReply = async () => {
+      const info = await transporter.sendMail({
+        from: "hello@prakamya.co.in",
+        to: address.address,
+        subject: "Hello from prakamya.co.in",
+        text: "Hello from prakamya.co.in",
+        html: "<b>Hello from prakamya.co.in</b>",
+      });
+      console.log("Message sent: %s", info.messageId);
+    };
     console.log("address : ", address);
+    SendReply();
     callback();
   },
   onRcptTo(address, session, callback) {
@@ -23,13 +43,10 @@ const server = new SMTPServer({
     });
     stream.on("end", () => {
       console.log("stream end.");
-      callback();
     });
     stream.on("close", () => {
       console.log("stream close.");
-      callback();
     });
-    callback();
   },
 });
 
