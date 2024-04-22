@@ -1,6 +1,6 @@
 const nodemailer = require("nodemailer");
 const transporter = nodemailer.createTransport({
-  host: "35.154.29.173",
+  host: "localhost",
   port: 25,
   secure: false,
   auth: {
