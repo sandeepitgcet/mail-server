@@ -4,8 +4,12 @@ import nodemailer from "nodemailer";
 
 const transporter = nodemailer.createTransport({
   host: "43.205.128.19",
-  port: 25,
-  secure: false,
+  port: 465,
+  secure: true,
+  auth: {
+    user: "sandeep@prakamya.co.in",
+    pass: "password",
+  },
 });
 
 const server = new SMTPServer({
