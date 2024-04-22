@@ -18,7 +18,7 @@ const server = new SMTPServer({
   },
   onData(stream, session, callback) {
     stream.on("data", async (data) => {
-      let parsed = simpleParser(data.toString());
+      let parsed = await simpleParser(data.toString());
       console.log("parsed : ", parsed);
     });
     stream.on("end", () => {
